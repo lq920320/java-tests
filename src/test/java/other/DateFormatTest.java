@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -66,6 +67,15 @@ public class DateFormatTest {
     public void datetimeFormatterTest() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse("2019-05-13", formatter);
+        System.out.println(date);
+        System.out.println(formatter.format(date));
+    }
+
+
+    @Test
+    public void datetimeFormatterTest2() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime date = LocalDateTime.parse("2019-05-13 16:00", formatter);
         System.out.println(date);
         System.out.println(formatter.format(date));
     }

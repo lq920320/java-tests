@@ -47,4 +47,14 @@ public class StringJoinTest {
     public void emptyMapGet() {
         System.out.println(new HashMap<>().get("123"));
     }
+
+    @Test
+    public void stringComplete() {
+        Integer a = 12522;
+        String s1 = String.format("%04d", a);
+        Integer b = 123;
+        String s2 = String.format("%04d", b);
+        System.out.println(s1.substring(s1.length() - 4));
+        System.out.println(s2.substring(s1.length() - 4));
+    }
 }
