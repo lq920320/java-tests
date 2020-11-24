@@ -3,6 +3,7 @@ package other;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @author liuqian
@@ -22,5 +23,21 @@ public class BigDecimalTest {
         System.out.println(decimal.compareTo(BigDecimal.ZERO) == 1);
         // 建议做法
         System.out.println(decimal.compareTo(BigDecimal.ZERO) > 0);
+    }
+
+    @Test
+    public void decimalCalculate() {
+        BigDecimal decimal1 = new BigDecimal("12");
+        BigDecimal decimal2 = new BigDecimal("4.56");
+        BigDecimal result = decimal1.divide(decimal2, 1, RoundingMode.HALF_UP);
+        BigDecimal result2 = decimal1.divide(decimal2, 5, RoundingMode.HALF_UP);
+        System.out.println(result);
+        System.out.println(result2);
+    }
+
+    @Test
+    public void intStrParse() {
+        String a = "1022";
+        System.out.println(Integer.valueOf(a));
     }
 }
