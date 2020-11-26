@@ -40,4 +40,21 @@ public class BigDecimalTest {
         String a = "1022";
         System.out.println(Integer.valueOf(a));
     }
+
+    @Test
+    public void someMethod() {
+        BigDecimal a = new BigDecimal("1E11");
+
+        System.out.println(a);
+        // 不使用任何指数
+        System.out.println(a.toPlainString());
+
+        // 有必要时使用科学计数法
+        System.out.println(a.toString());
+
+        // 有必要时使用工程计数法。工程记数法是一种工程计算中经常使用的记录数字的方法，与科学技术法类似，但要求10的幂必须是3的倍数
+        System.out.println(a.toEngineeringString());
+
+        System.out.println(a.stripTrailingZeros());
+    }
 }
