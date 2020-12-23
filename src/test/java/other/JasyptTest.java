@@ -1,9 +1,13 @@
 package other;
 
 import com.ulisesbocchio.jasyptspringboot.encryptor.ByteEncryptorStringEncryptorDelegate;
+import com.ulisesbocchio.jasyptspringboot.encryptor.DefaultLazyEncryptor;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.junit.Test;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
+import org.springframework.core.env.StandardEnvironment;
 
 /**
  * @author liuqian
@@ -11,10 +15,18 @@ import org.junit.Test;
  */
 public class JasyptTest {
 
+    /**
+     * jasypt:
+     *   encryptor:
+     *     password: A1B2c3d4!
+     */
 
     @Test
     public void jasyptTest() {
-//        StringEncryptor encryptor = new StandardPBEStringEncryptor();
+//        Environment environment = new StandardEnvironment();
+//        environment.acceptsProfiles(Profiles.of("jasypt.encryptor.password=A1B2c3d4!"));
+//
+//        StringEncryptor encryptor = new DefaultLazyEncryptor(environment);
 //        // 你的邮箱密码
 //        String password = "Just4Test!";
 //        // 加密后的密码(注意：配置上去的时候需要加 ENC(加密密码))

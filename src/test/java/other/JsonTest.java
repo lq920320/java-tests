@@ -21,7 +21,6 @@ public class JsonTest {
         } else {
             System.out.println("It works");
         }
-
     }
 
     @Data

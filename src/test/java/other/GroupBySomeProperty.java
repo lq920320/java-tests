@@ -113,20 +113,20 @@ public class GroupBySomeProperty {
     }
 
     @Data
-    private class StudentGrade {
+    private static class StudentGrade {
         private String stuNum;
         private String stuName;
         private List<CourseScore> courseScoreList;
     }
 
     @Data
-    private class CourseScore {
+    private static class CourseScore {
         private String course;
         private Integer score;
     }
 
     @Data
-    private class StudentScore {
+    private static class StudentScore {
         private String stuNum;
         private String stuName;
         private String course;
