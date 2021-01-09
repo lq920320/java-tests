@@ -1,5 +1,6 @@
 package other;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -33,6 +34,14 @@ public class BigDecimalTest {
         BigDecimal result2 = decimal1.divide(decimal2, 5, RoundingMode.HALF_UP);
         System.out.println(result);
         System.out.println(result2);
+    }
+
+    @Test
+    public void decimalEqual() {
+        BigDecimal decimal1 = new BigDecimal("12");
+        BigDecimal decimal2 = new BigDecimal("12.000");
+        System.out.println(ObjectUtils.notEqual(decimal1, decimal2));
+        System.out.println(decimal1.compareTo(decimal2));
     }
 
     @Test
