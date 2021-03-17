@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -78,5 +79,14 @@ public class DateFormatTest {
         LocalDateTime date = LocalDateTime.parse("2019-05-13 16:00", formatter);
         System.out.println(date);
         System.out.println(formatter.format(date));
+    }
+
+    @Test
+    public void dateFormatTest() {
+        Date now = new Date();
+        System.out.println(now);
+        System.out.println(now.toInstant());
+        System.out.println(ZoneId.systemDefault());
+        System.out.println(now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString());
     }
 }

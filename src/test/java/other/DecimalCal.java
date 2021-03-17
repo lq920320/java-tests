@@ -1,0 +1,42 @@
+package other;
+
+import org.junit.Test;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
+
+/**
+ * @author zetu
+ * @desc
+ * @date 2021/3/16
+ */
+public class DecimalCal {
+
+    @Test
+    public void decimalCal() {
+        BigDecimal num = new BigDecimal("-10");
+        BigDecimal a = num.add(new BigDecimal("100"));
+        BigDecimal times = a.divide(new BigDecimal("100"));
+        BigDecimal result = mul(0, RoundingMode.HALF_EVEN, new BigDecimal("1000"),
+                times);
+
+        System.out.println(result);
+
+
+    }
+
+    public static BigDecimal mul(int scale, RoundingMode roundingMode, BigDecimal... multiplies) {
+        BigDecimal one = new BigDecimal(1);
+        BigDecimal r = new BigDecimal(1);
+        BigDecimal[] var5 = multiplies;
+        int var6 = multiplies.length;
+
+        for(int var7 = 0; var7 < var6; ++var7) {
+            BigDecimal b = var5[var7];
+            r = r.multiply(null == b ? one : b);
+        }
+
+        return r.setScale(scale, roundingMode);
+    }
+}
