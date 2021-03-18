@@ -15,10 +15,9 @@ public class DecimalCal {
 
     @Test
     public void decimalCal() {
-        BigDecimal num = new BigDecimal("-10");
-        BigDecimal a = num.add(new BigDecimal("100"));
-        BigDecimal times = a.divide(new BigDecimal("100"));
-        BigDecimal result = mul(0, RoundingMode.HALF_EVEN, new BigDecimal("1000"),
+        BigDecimal num = new BigDecimal("-50");
+        BigDecimal times = (num.add(new BigDecimal("100"))).divide(new BigDecimal("100"));
+        BigDecimal result = mul(0, RoundingMode.HALF_EVEN, new BigDecimal("999999.99"),
                 times);
 
         System.out.println(result);

@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +37,30 @@ public class DeleteRepeatedData {
         employeeList = employeeList.stream().distinct().collect(Collectors.toList());
         System.out.println(objectMapper.writeValueAsString(employeeList));
 
+    }
+
+
+    @Test
+    public void distinctByKeyTest() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Employee> employeeList = getEmployees();
+        System.out.println(objectMapper.writeValueAsString(employeeList));
+
+        List<Employee> employees = employeeList.stream().filter(distinctByKey(Employee::getId)).collect(Collectors.toList());
+        System.out.println(objectMapper.writeValueAsString(employees));
+
+        List<Employee> employees2 = employeeList.stream().filter(distinctByKey2(Employee::getId)).collect(Collectors.toList());
+        System.out.println(objectMapper.writeValueAsString(employees2));
+    }
+
+    private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> seen.add(keyExtractor.apply(t));
+    }
+
+    private static <T> Predicate<T> distinctByKey2(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = new HashSet<>();
+        return t -> seen.add(keyExtractor.apply(t));
     }
 
     private List<Employee> getEmployees() {
