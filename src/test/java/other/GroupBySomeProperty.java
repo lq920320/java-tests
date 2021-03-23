@@ -3,15 +3,16 @@ package other;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 /**
  * @author liuqian
@@ -24,12 +25,22 @@ public class GroupBySomeProperty {
         ObjectMapper objectMapper = new ObjectMapper();
         List<StudentScore> scoreList = getTestData();
         List<StudentGrade> gradeList = groupByStu(scoreList);
+        List<StudentGrade> gradeList2 = groupByStu2(scoreList);
+
         System.out.println(objectMapper.writeValueAsString(scoreList));
+        long startTime1 = System.currentTimeMillis();
         System.out.println(objectMapper.writeValueAsString(gradeList));
+        long endTime1 = System.currentTimeMillis();
+        System.out.println("group by 1 spend time: " + (endTime1 - startTime1) + " ms");
+        // groupingBy() is better
+        long startTime2 = System.currentTimeMillis();
+        System.out.println(objectMapper.writeValueAsString(gradeList2));
+        long endTime2 = System.currentTimeMillis();
+        System.out.println("group by 2 spend time: " + (endTime2 - startTime2) + " ms");
     }
 
     private List<StudentGrade> groupByStu(List<StudentScore> scoreList) {
-        List<StudentGrade> gradeList = scoreList.parallelStream().filter(distinctByKey(StudentScore::getStuNum)).map(score -> new StudentGrade() {{
+        List<StudentGrade> gradeList = scoreList.stream().filter(distinctByKey(StudentScore::getStuNum)).map(score -> new StudentGrade() {{
             setStuNum(score.getStuNum());
             setStuName(score.getStuName());
         }}).collect(Collectors.toList());
@@ -48,6 +59,33 @@ public class GroupBySomeProperty {
     private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
+    }
+
+
+    private List<StudentGrade> groupByStu2(List<StudentScore> scoreList) {
+        Map<String, List<StudentScore>> stuScoreMap = scoreList.stream().collect(
+                groupingBy(StudentScore::getStuNum)
+        );
+        Set<String> keySet = stuScoreMap.keySet();
+
+        return keySet.stream().map(stuNum -> {
+            StudentGrade studentGrade = new StudentGrade();
+            studentGrade.setStuNum(stuNum);
+            List<StudentScore> studentScores = stuScoreMap.get(stuNum);
+            if (CollectionUtils.isEmpty(studentScores)) {
+                return null;
+            }
+            studentGrade.setStuName(studentScores.get(0).getStuName());
+            List<CourseScore> tempCourseScoreList = studentScores.stream().map(
+                    score -> new CourseScore() {{
+                        setCourse(score.getCourse());
+                        setScore(score.getScore());
+                    }}).collect(Collectors.toList());
+
+            studentGrade.setCourseScoreList(tempCourseScoreList);
+
+            return studentGrade;
+        }).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     private List<StudentScore> getTestData() {
