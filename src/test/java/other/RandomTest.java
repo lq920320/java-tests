@@ -65,4 +65,17 @@ public class RandomTest {
         System.out.println(idStr.length());
         System.out.println(idStr.substring(idStr.length() - 8));
     }
+
+    @Test
+    public void randomSeedTest() {
+        String randomDigitalStr;
+        Random random = new Random(System.nanoTime());
+
+        for (int i = 0; i < 10; i++) {
+            randomDigitalStr = String.valueOf(random.nextLong());
+            System.out.println(randomDigitalStr.replaceAll("-", ""));
+            System.out.println(randomDigitalStr.length());
+        }
+    }
+
 }
