@@ -1,5 +1,6 @@
 package other;
 
+import com.alibaba.fastjson.JSONArray;
 import lombok.Data;
 import org.junit.Test;
 
@@ -21,6 +22,12 @@ public class JsonTest {
         } else {
             System.out.println("It works");
         }
+    }
+
+    @Test
+    public void jsonArrayTest() {
+        JSONArray array = JSONArray.parseArray("[]");
+        System.out.println(array);
     }
 
     @Data

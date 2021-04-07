@@ -125,5 +125,42 @@ public class StringSubTest {
         System.out.println(b);
     }
 
+    @Test
+    public void splitDiskLinks() {
+        String text = "链接: https://pan.baidu.com/s/1upS6c7i_q9ZS1MxFIm5rqA 提取码: jwuv 复制这段内容后打开百度网盘手机App，操作更方便哦\n" +
+                "链接: https://pan.baidu.com/s/1URNRIIaRz4FOh9nEQFkiHQ  密码: 4n67\n" +
+                "https://yunpan.360.cn/surl_yR5vuAPRR7W （提取码：7373）\n" +
+                "链接：https://share.weiyun.com/0zibSvx2 密码：ep6bc8\n" +
+                "链接: https://pan.baidu.com/s/1AZE1W-_xbT6ovbwW6GklLQ \n提取码: wfeq \n复制这段内容后打开百度网盘手机App，操作更方便哦";
+
+        String postfix = "复制这段内容后打开百度网盘手机App，操作更方便哦";
+//        List<String> baiduWebLinks = new ArrayList<>();
+//        while (text.contains(postfix)) {
+//            String baiduWebLink = StringUtils.substringBefore(text, postfix);
+//            System.out.println("baidulink:  " + baiduWebLink);
+//            baiduWebLinks.add(baiduWebLink);
+//
+//            text = StringUtils.substringAfter(text, postfix);
+//            System.out.println(text);
+//        }
+
+        String[] linkArray = text.split("\n");
+        List<String> linkList = new ArrayList<>();
+
+        for (int i = 0; i < linkArray.length; i++) {
+            String a = linkArray[i];
+            if (postfix.equals(a)) {
+                linkList = linkList.subList(0, linkList.size() - 2);
+                linkList.add(linkArray[i - 2] + linkArray[i - 1] + a);
+            } else {
+                linkList.add(a);
+            }
+        }
+
+        for (String s : linkList) {
+            System.out.println(s);
+        }
+    }
+
 
 }
