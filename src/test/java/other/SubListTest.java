@@ -1,5 +1,6 @@
 package other;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -55,12 +56,41 @@ public class SubListTest {
 
         userNames.iterator();
 
-        for (String userName : userNames) {
-            if (userName.equals("Hollis")) {
-                userNames.remove(userName);
-            }
-        }
+//        for (String userName : userNames) {
+//            if (userName.equals("Hollis")) {
+//                userNames.remove(userName);
+//            }
+//        }
+        userNames.removeIf(userName -> userName.equals("Hollis"));
 
         System.out.println(userNames);
+    }
+
+    @Test
+    public void subListTest() {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= 95; i++) {
+            list.add(i);
+        }
+
+        int batchNumber = 9;
+        int totalSize = list.size();
+        int quotient = totalSize / batchNumber;
+        int remainder = totalSize % batchNumber;
+        int scrollTimes = quotient;
+        if (remainder > 0) {
+            scrollTimes += 1;
+        }
+        for (int i = 0; i < scrollTimes; i++) {
+            int fromIndex = i * batchNumber;
+            int toIndex;
+            if (i == scrollTimes - 1) {
+                toIndex = totalSize;
+            } else {
+                toIndex = fromIndex + batchNumber;
+            }
+            List<Integer> batchList = list.subList(fromIndex, toIndex);
+            System.out.println(JSON.toJSONString(batchList));
+        }
     }
 }
