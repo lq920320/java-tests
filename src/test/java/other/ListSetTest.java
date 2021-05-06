@@ -23,25 +23,29 @@ public class ListSetTest {
             add(5L);
         }};
         List<Long> newList = new ArrayList<Long>() {{
-            add(3L);
             add(4L);
             add(5L);
             add(6L);
-            add(7L);
         }};
 
         Set<Long> oldSet = new HashSet<>(oldList);
         Set<Long> newSet = new HashSet<>(newList);
 
-        Set<Long> result = new HashSet<>();
-        result.clear();
-        result.addAll(oldSet);
+        Set<Long> result = new HashSet<>(oldSet);
         result.removeAll(newSet);
         System.out.println("oldSet 与 newSet 的差集，要删除的数据：" + result);
 
         result.clear();
         result.addAll(newSet);
         result.removeAll(oldSet);
-        System.out.println("newSet 与 newSet 的差集，要插入的数据：" + result);
+        System.out.println("newSet 与 oldSet 的差集，要插入的数据：" + result);
+    }
+
+    @Test
+    public void listAddTest() {
+        List<String> a = new ArrayList<>();
+        List<String> b = null;
+
+        a.addAll(b);
     }
 }

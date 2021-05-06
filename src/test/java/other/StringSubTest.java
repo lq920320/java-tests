@@ -1,10 +1,12 @@
 package other;
 
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class StringSubTest {
@@ -162,5 +164,32 @@ public class StringSubTest {
         }
     }
 
+
+    @Test
+    public void subStringTest() {
+        String a = "2021款韩版流学生帅气男式ins上衣长袖T恤春夏季男装-5106商品名称:2021款韩版流学生帅气男式ins上衣长袖T恤春夏季男装-5106 类目名称:T恤 款式编码:637696520423";
+        int from = a.indexOf("类目");
+        int to = a.lastIndexOf("款");
+        System.out.println(from);
+        System.out.println(to);
+        System.out.println(a.substring(from, to));
+    }
+
+    @Test
+    public void stringForeach() {
+        List<String> stringList = new ArrayList<String>() {{
+            add("AAA");
+            add("Abb");
+            add("CCc");
+        }};
+        System.out.println(stringList);
+
+       List<String> a = stringList.stream()
+               .map(String::toLowerCase)
+               .collect(Collectors.toList());
+
+        System.out.println(a);
+        System.out.println(stringList);
+    }
 
 }

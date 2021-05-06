@@ -78,4 +78,13 @@ public class RandomTest {
         }
     }
 
+    @Test
+    public void randomZeroTest() {
+        Random random = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(random.nextInt(2));
+        }
+    }
+
 }
