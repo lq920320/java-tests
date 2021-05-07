@@ -1,11 +1,14 @@
 package other;
 
+import lombok.Data;
 import org.junit.Test;
+import sun.security.acl.AclEntryImpl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author liuqian
@@ -44,8 +47,40 @@ public class ListSetTest {
     @Test
     public void listAddTest() {
         List<String> a = new ArrayList<>();
-        List<String> b = null;
+        List<String> b = new ArrayList<>();
 
-        a.addAll(b);
+        a.removeAll(b);
+    }
+
+    @Test
+    public void changeListOfObject() {
+        Person person = new Person();
+        List<String> habits = new ArrayList<String>() {{
+            add("A");
+            add("B");
+            add("C");
+        }};
+
+        person.setHabits(habits);
+
+        List<String> h = person.getHabits();
+
+        System.out.println(h);
+
+        changeList(habits, person);
+        h = person.getHabits();
+        System.out.println(h);
+        System.out.println(person.getHabits());
+    }
+
+    private void changeList(List<String> habits, Person person) {
+        habits = habits.stream().limit(2).collect(Collectors.toList());
+        person.setHabits(habits);
+    }
+
+
+    @Data
+    static class Person {
+        private List<String> habits;
     }
 }
