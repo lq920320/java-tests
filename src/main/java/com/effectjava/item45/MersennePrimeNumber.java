@@ -21,16 +21,16 @@ public class MersennePrimeNumber {
 
     public static void main(String[] args) {
         // stream
-        primes().map(p -> TWO.pow(p.intValueExact()).subtract(ONE))
-                .filter(mersenne -> mersenne.isProbablePrime(50))
-                .limit(10)
-                .forEach(System.out::println);
-
-        // parallel stream
-//        primes().parallel().map(p -> TWO.pow(p.intValueExact()).subtract(ONE))
+//        primes().map(p -> TWO.pow(p.intValueExact()).subtract(ONE))
 //                .filter(mersenne -> mersenne.isProbablePrime(50))
 //                .limit(10)
 //                .forEach(System.out::println);
+
+        // parallel stream
+        primes().parallel().map(p -> TWO.pow(p.intValueExact()).subtract(ONE))
+                .filter(mersenne -> mersenne.isProbablePrime(50))
+                .limit(10)
+                .forEach(System.out::println);
     }
 
 }

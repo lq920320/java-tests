@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.concurrent.CompletableFuture;
 
 import static java.util.Comparator.comparingInt;
 
@@ -30,11 +30,10 @@ public class Demo1 {
         System.out.println("排序前：" + JSON.toJSONString(words));
         sort1(words);
         System.out.println("排序后：" + JSON.toJSONString(words));
-
-
     }
 
     private static void sort1(List<String> words) {
+        // 匿名类
         Collections.sort(words, new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
@@ -42,7 +41,7 @@ public class Demo1 {
             }
         });
 
-        // replace with lambda
+        // lambda
         Collections.sort(words, (s1, s2) -> Integer.compare(s1.length(), s2.length()));
 
         // 具体实现代替构造方法

@@ -1,5 +1,6 @@
 package other;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableList;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -61,5 +63,31 @@ public class ListToString {
             log.info("ImmutableList.of() 不能添加元素");
         }
 
+    }
+
+
+    @Test
+    public void aTest() {
+        String longCode = "011039002";
+        List<String> condition = IntStream.range(1, longCode.length() / 3)
+                .mapToObj((i) -> longCode.substring(0, i * 3))
+                .collect(Collectors.toList());
+
+        System.out.println(JSON.toJSONString(condition));
+    }
+
+
+    @Test
+    public void param() {
+        paramTest("Abc");
+
+        List<String> strList = new ArrayList<>();
+        strList.add("SCA");
+        strList.add("KKK");
+        paramTest(strList.toArray(new String[0]));
+    }
+
+    private void paramTest(String... strings) {
+        System.out.println(strings);
     }
 }

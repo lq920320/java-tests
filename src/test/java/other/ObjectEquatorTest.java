@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,6 +52,11 @@ public class ObjectEquatorTest {
         users2.add(user2);
 
         List<FieldInfo> fields = equator.getDiffFields(user1, user2);
+        for (FieldInfo field : fields) {
+            System.out.println("1" + field.getFirstFieldType().getName());
+            System.out.println("2" + field.getFirstFieldType().getSimpleName());
+            System.out.println("3" + Arrays.toString(field.getFirstFieldType().getDeclaredFields()));
+        }
         System.out.println(JSON.toJSONString(fields));
 
         List<FieldInfo> fields2 = equator.getDiffFields(users1, users2);

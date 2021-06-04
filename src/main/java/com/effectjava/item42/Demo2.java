@@ -19,9 +19,9 @@ import java.util.concurrent.atomic.AtomicLong;
 @Slf4j
 public class Demo2 {
 
-    private LoadingCache<Integer, AtomicLong> loadingCache;
+    public static void main(String[] args) {
+        LoadingCache<Integer, AtomicLong> loadingCache;
 
-    public void main(String[] args) {
         loadingCache = CacheBuilder.newBuilder()
                 .expireAfterWrite(3, TimeUnit.SECONDS)
                 // 这里可以监听移除动作
