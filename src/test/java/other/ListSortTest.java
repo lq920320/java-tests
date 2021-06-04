@@ -28,12 +28,11 @@ public class ListSortTest {
         System.out.println("\n排序后：");
         // 创建一个新列表
         aList = aList.stream().sorted().collect(Collectors.toList());
-        // List 实现了 sort 方法
+        // 使用 List 实现的 sort 方法
         aList.sort(Comparator.comparing(a -> a));
 
         aList.forEach(a -> System.out.printf("%4d", a));
         System.out.println();
-
     }
 
     @Test
@@ -50,7 +49,7 @@ public class ListSortTest {
         });
         System.out.println("\n排序后：");
         // 正常的排序会报错
-        // aList.sort(Comparator.comparing(a -> a)); // 执行拆箱操作时 throw NPE
+        // aList.sort(Comparator.comparing(a -> a)); // throw NPE
         aList = aList.stream().sorted(
                 // nullsLast() / nullsFirst()
                 // 对应的整个列表的顺序为： Comparator.naturalOrder() 正序；Comparator.reverseOrder() 反序
@@ -103,6 +102,7 @@ public class ListSortTest {
         }
         // 排序后
         List<Worker> sortedWorkers = testWorkers.stream()
+                // 薪水倒序
                 .sorted(Comparator.comparing(Worker::getSalary, Comparator.reverseOrder()))
                 .sorted(Comparator.comparing(Worker::getAge))
                 .collect(Collectors.toList());
