@@ -42,6 +42,11 @@ public class ListSetTest {
         result.addAll(newSet);
         result.removeAll(oldSet);
         System.out.println("newSet 与 oldSet 的差集，要插入的数据：" + result);
+
+        result.clear();
+        result.addAll(newSet);
+        result.retainAll(oldSet);
+        System.out.println("newSet 与 oldSet 的交集，要更新的数据：" + result);
     }
 
     @Test
