@@ -47,7 +47,7 @@ public class Anagrams {
 
         // 中间方案
         try (Stream<String> words = Files.lines(path)) {
-            words.collect(groupingBy(word -> alphabetize(word)))
+            words.collect(groupingBy(Anagrams::alphabetize))
                     .values().stream()
                     .filter(group -> group.size() >= minGroupSize)
                     .forEach(g -> System.out.println(g.size() + ": " + g));
