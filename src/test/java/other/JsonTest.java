@@ -1,6 +1,9 @@
 package other;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import lombok.Data;
 import org.junit.Test;
 
@@ -28,6 +31,14 @@ public class JsonTest {
     public void jsonArrayTest() {
         JSONArray array = JSONArray.parseArray("[]");
         System.out.println(array);
+    }
+
+    @Test
+    public void jsonObjectTest() {
+        Employee employee = new Employee();
+        employee.setEmpNO("1");
+        JSONObject a = JSONObject.parseObject(JSON.toJSONString(employee, SerializerFeature.WriteMapNullValue));
+        System.out.println(a);
     }
 
     @Data

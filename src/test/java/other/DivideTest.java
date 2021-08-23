@@ -26,4 +26,14 @@ public class DivideTest {
         System.out.println(Float.parseFloat(Integer.toString(b)));
         System.out.println((int) Math.ceil(Float.parseFloat(Integer.toString(a)) / Float.parseFloat(Integer.toString(b))));
     }
+
+    @Test
+    public void divideGetDay() {
+        Long a = 1296000L;
+        System.out.println(a / 3600 / 24);
+        Long b = 259200L;
+        System.out.println(b / 3600 / 24);
+
+        System.out.println(4 * 3600 * 24);
+    }
 }

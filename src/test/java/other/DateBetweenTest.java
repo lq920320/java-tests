@@ -1,8 +1,8 @@
 package other;
 
+import cn.hutool.core.date.DateUtil;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.assertj.core.util.DateUtil;
 import org.junit.Test;
 
 import javax.xml.crypto.Data;
@@ -25,6 +25,42 @@ public class DateBetweenTest {
         Date bDate = DateUtils.parseDate(b, "yyyy-MM-dd");
 
         System.out.println(differentDays(aDate, bDate));
+    }
+
+    @Test
+    public void dateBetweenMonthTest() throws ParseException {
+        String a = "2021-04-01 00:00:00";
+        String b = "2021-02-01 23:59:59";
+
+        Date aDate = DateUtils.parseDate(a, "yyyy-MM-dd HH:mm:ss");
+        Date bDate = DateUtils.parseDate(b, "yyyy-MM-dd HH:mm:ss");
+
+        System.out.println(betweenMonth(aDate, bDate, true));
+        System.out.println(betweenMonth(aDate, bDate, false));
+    }
+
+    /**
+     * 两个日期相隔多少个月
+     *
+     * @param aDate
+     * @param bDate
+     */
+    private long betweenMonth(Date aDate, Date bDate, boolean isReset) {
+        Calendar beginCal = DateUtil.calendar(aDate);
+        Calendar endCal = DateUtil.calendar(bDate);
+        int betweenYear = endCal.get(Calendar.YEAR) - beginCal.get(Calendar.YEAR);
+        int betweenMonthOfYear = endCal.get(Calendar.MONTH) - beginCal.get(Calendar.MONTH);
+        int result = betweenYear * 12 + betweenMonthOfYear;
+        if (!isReset) {
+            endCal.set(Calendar.YEAR, beginCal.get(Calendar.YEAR));
+            endCal.set(Calendar.MONTH, beginCal.get(Calendar.MONTH));
+            long between = endCal.getTimeInMillis() - beginCal.getTimeInMillis();
+            if (between < 0L) {
+                return result - 1;
+            }
+        }
+
+        return result;
     }
 
 
