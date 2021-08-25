@@ -1,5 +1,6 @@
 package other;
 
+import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -7,6 +8,12 @@ import org.junit.Test;
 
 import javax.xml.crypto.Data;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,13 +37,43 @@ public class DateBetweenTest {
     @Test
     public void dateBetweenMonthTest() throws ParseException {
         String a = "2021-04-01 00:00:00";
-        String b = "2021-02-01 23:59:59";
+        String b = "2021-07-01 23:59:59";
+
+        String c = "2021-04-25 00:00:00";
+        String d = "2021-07-23 23:59:59";
 
         Date aDate = DateUtils.parseDate(a, "yyyy-MM-dd HH:mm:ss");
         Date bDate = DateUtils.parseDate(b, "yyyy-MM-dd HH:mm:ss");
+        Date cDate = DateUtils.parseDate(c, "yyyy-MM-dd HH:mm:ss");
+        Date dDate = DateUtils.parseDate(d, "yyyy-MM-dd HH:mm:ss");
 
+        System.out.println("======================= a ====== b ============");
         System.out.println(betweenMonth(aDate, bDate, true));
         System.out.println(betweenMonth(aDate, bDate, false));
+        System.out.println(DateUtil.between(aDate, bDate, DateUnit.WEEK));
+        System.out.println(DateUtil.between(aDate, bDate, DateUnit.DAY));
+
+        Temporal temporal1 = LocalDateTime.parse(a, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Temporal temporal2 = LocalDateTime.parse(b, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+        System.out.println(ChronoUnit.MONTHS.between(temporal1, temporal2));
+
+        System.out.println("======================= c ====== d ============");
+        System.out.println(betweenMonth(cDate, dDate, true));
+        System.out.println(betweenMonth(cDate, dDate, false));
+        System.out.println(DateUtil.between(cDate, dDate, DateUnit.WEEK));
+        System.out.println(DateUtil.between(cDate, dDate, DateUnit.DAY));
+
+//        Temporal temporal3 = LocalDateTime.parse(c, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+//        Temporal temporal4 = LocalDateTime.parse(d, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Temporal temporal3 = cDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        Temporal temporal4 = dDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+        System.out.println(temporal3);
+        System.out.println(temporal4);
+
+        System.out.println(ChronoUnit.MONTHS.between(temporal3, temporal4));
+
     }
 
     /**
