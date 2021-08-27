@@ -50,6 +50,10 @@ public class DateBetweenTest {
         System.out.println("======================= a ====== b ============");
         System.out.println(betweenMonth(aDate, bDate, true));
         System.out.println(betweenMonth(aDate, bDate, false));
+        System.out.println(DateUtil.betweenMonth(aDate, bDate, false));
+        System.out.println(DateUtil.betweenYear(aDate, bDate, false));
+        System.out.println(DateUtil.betweenWeek(aDate, bDate, false));
+        System.out.println(DateUtil.betweenDay(aDate, bDate, false));
         System.out.println(DateUtil.between(aDate, bDate, DateUnit.WEEK));
         System.out.println(DateUtil.between(aDate, bDate, DateUnit.DAY));
 

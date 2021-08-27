@@ -4,6 +4,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +26,40 @@ public class DateFormatTest {
 
         System.out.println(System.currentTimeMillis());
         System.out.println(System.currentTimeMillis() / 1000);
+    }
+
+    @Test
+    public void transTest() throws ParseException {
+        String dateStr1 = "2021-08-27";
+        String dateStr2 = "2021-08-01";
+        String dateTimeStr1 = "2021-08-05 11:45:32";
+        String dateTimeStr2 = "2021-08-10 10:45:32";
+
+        Date date1 = DateUtils.parseDate(dateStr1, "yyyy-MM-dd");
+        Date date2 = DateUtils.parseDate(dateStr2, "yyyy-MM-dd");
+        Date dateTime1 = DateUtils.parseDate(dateTimeStr1, "yyyy-MM-dd HH:mm:ss");
+        Date dateTime2 = DateUtils.parseDate(dateTimeStr2, "yyyy-MM-dd HH:mm:ss");
+
+        long start0 = System.currentTimeMillis();
+        ZoneId zoneId = ZoneId.systemDefault();
+        // 万万没想到，获取时区居然这么耗时
+        System.out.println("获取zoneId耗时：" + (System.currentTimeMillis() - start0) + "ms");
+
+        long start1 = System.currentTimeMillis();
+        System.out.println(date1.toInstant().atZone(zoneId).toLocalDate());
+        System.out.println("date1转换localDate耗时：" + (System.currentTimeMillis() - start1) + "ms");
+
+        long start2 = System.currentTimeMillis();
+        System.out.println(date2.toInstant().atZone(zoneId).toLocalDateTime());
+        System.out.println("date2转换localDateTime耗时：" + (System.currentTimeMillis() - start2) + "ms");
+
+        long start3 = System.currentTimeMillis();
+        System.out.println(dateTime1.toInstant().atZone(zoneId).toLocalDateTime());
+        System.out.println("dateTime1转换localDateTime耗时：" + (System.currentTimeMillis() - start3) + "ms");
+
+        long start4 = System.currentTimeMillis();
+        System.out.println(dateTime2.toInstant().atZone(zoneId).toLocalDateTime());
+        System.out.println("dateTime2转换localDateTime耗时：" + (System.currentTimeMillis() - start4) + "ms");
     }
 
     private String getAfterOneDay(String today) {
