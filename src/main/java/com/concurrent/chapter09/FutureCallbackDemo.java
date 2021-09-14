@@ -32,7 +32,7 @@ public class FutureCallbackDemo {
                 Thread.sleep(SLEEP_GAP);
                 log.info("水开了");
             } catch (InterruptedException e) {
-                log.error(" 发生异常被中断");
+                log.error(" 烧水发生异常被中断");
                 return false;
             }
             log.info("烧水工作，运行结束");
@@ -53,6 +53,7 @@ public class FutureCallbackDemo {
                 log.info("洗完了");
             } catch (InterruptedException e) {
                 log.error(" 清洗工作发生异常被中断");
+                return false;
             }
             log.info(" 清洗工作，运行结束");
             return true;
