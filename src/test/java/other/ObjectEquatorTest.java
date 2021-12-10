@@ -8,10 +8,8 @@ import lombok.Data;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.math.BigInteger;
+import java.util.*;
 
 /**
  * 对象比较器测试
@@ -61,6 +59,24 @@ public class ObjectEquatorTest {
 
         List<FieldInfo> fields2 = equator.getDiffFields(users1, users2);
         System.out.println(JSON.toJSONString(fields2));
+    }
+
+    @Test
+    public void objectsDeepEquals() {
+        BigDecimal a = new BigDecimal("122123");
+        BigDecimal b = new BigDecimal("122123.000");
+
+        System.out.println(Objects.equals(a, b));
+        System.out.println(Objects.deepEquals(a, b));
+    }
+
+    @Test
+    public void intTest() {
+        int a = 1001;
+        Integer b = 1001;
+        System.out.println(a == b);
+        System.out.println(Objects.equals(a, b));
+        System.out.println(Objects.equals(a, null));
     }
 
     @Data

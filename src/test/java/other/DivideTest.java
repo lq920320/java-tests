@@ -22,9 +22,11 @@ public class DivideTest {
         int a = 5;
         int b = 3;
         System.out.println(5 / 3);
+        System.out.println((double) a / b);
         System.out.println(Float.parseFloat(Integer.toString(a)));
         System.out.println(Float.parseFloat(Integer.toString(b)));
         System.out.println((int) Math.ceil(Float.parseFloat(Integer.toString(a)) / Float.parseFloat(Integer.toString(b))));
+        System.out.println(Float.parseFloat(Integer.toString(a)) / Float.parseFloat(Integer.toString(b)));
     }
 
     @Test
