@@ -3,7 +3,9 @@ package other;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author liuqian
@@ -22,5 +24,12 @@ public class StreamSumTest {
 
         Integer sum = intList.parallelStream().reduce(Integer::sum).orElse(0);
         System.out.println(sum);
+    }
+
+    @Test
+    public void stream2Test() {
+        Integer[] array = {12, 33, 33, 34, 34};
+        List<Integer> list = Arrays.stream(array).sorted((a, b) -> b - a).collect(Collectors.toList());
+        System.out.println(list);
     }
 }

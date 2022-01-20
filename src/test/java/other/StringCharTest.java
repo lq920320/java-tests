@@ -26,8 +26,7 @@ public class StringCharTest {
                 "   空格   ，分割符\n";
         String[] aArray = a.split("，分割符");
 
-        for (int i = 0; i < aArray.length; i++) {
-            String s = aArray[i];
+        for (String s : aArray) {
             System.out.println(s);
             String sTrim = s.replace("\n", "");
             if (StringUtils.isBlank(sTrim)) {
@@ -47,5 +46,18 @@ public class StringCharTest {
         for (String s : aArray) {
             System.out.println(s);
         }
+    }
+
+
+    @Test
+    public void fullTextTest() {
+        // 处理富文本数据
+        String a = "<p><img src=\\\"https://images.sursung.com/test/dis/F1120FDFB54D4E3FB192998404D2CF89_s12474_h300_w371.jpg\\\"/>abdaskhdaj撒打算打算的阿萨里打开撒娇</p>";
+
+        a = a.replaceAll("</?[^>]+>", "");
+        System.out.println(a);
+        a = a.replaceAll("<a>\\s*|\t|\r|\n|&nbsp;|</a>", "");
+
+        System.out.println(a);
     }
 }
