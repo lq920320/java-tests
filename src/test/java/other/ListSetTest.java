@@ -51,10 +51,15 @@ public class ListSetTest {
 
     @Test
     public void listAddTest() {
-        List<String> a = new ArrayList<>();
-        List<String> b = new ArrayList<>();
-
-        a.removeAll(b);
+        Set<String> a = new HashSet<String>() {{
+            add("977E68CB5DD94A74ACB483959ED8B7D6");
+        }};
+        List<String> b = new ArrayList<String>() {{
+            add("977E68CB5DD94A74ACB483959ED8B7D6");
+        }};
+        System.out.println(a);
+        b.forEach(a::remove);
+        System.out.println(a);
     }
 
     @Test

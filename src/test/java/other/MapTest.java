@@ -3,7 +3,9 @@ package other;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +34,38 @@ public class MapTest {
         a.putAll(c);
 
         System.out.println(JSON.toJSONString(a));
+    }
+
+    @Test
+    public void mapRemoveTest() {
+        Map<String, List<Integer>> map = new HashMap<>();
+        map.put("X", new ArrayList<Integer>() {{
+            add(1);
+            add(2);
+            add(3);
+        }});
+        map.put("Y", new ArrayList<Integer>() {{
+            add(4);
+            add(5);
+            add(6);
+        }});
+        map.put("Z", new ArrayList<Integer>() {{
+            add(7);
+            add(8);
+            add(9);
+        }});
+        // map.remove(); return the oldValue that removed
+        List<Integer> xList = map.remove("X");
+        System.out.println("after remove X: " + map);
+        System.out.println("removed X: " + xList);
+
+        List<Integer> yList = map.remove("Y");
+        System.out.println("after remove Y: " + map);
+        System.out.println("removed Y: " + yList);
+
+        List<Integer> zList = map.remove("Z");
+        System.out.println("after remove Z: " + map);
+        System.out.println("removed Z: " + zList);
     }
 
 }
