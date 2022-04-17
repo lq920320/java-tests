@@ -26,6 +26,16 @@ public class StringUtilsEqualTest {
     }
 
     @Test
+    public void stringEqualTest() {
+        String a = null;
+        String b = "This is a String";
+        String c = "This is a String";
+        // StringUtils.equals(CharSequence cs1, CharSequence cs2) 两个参数皆为 nullable
+        System.out.println(b.equals(a));
+        System.out.println(StringUtils.equals(b, c));
+    }
+
+    @Test
     public void upperCaseTest() {
         String a = "abcdefghijklmnopqrstuvwxyz";
         System.out.println(a.toUpperCase(Locale.ROOT));
