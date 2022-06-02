@@ -68,4 +68,39 @@ public class MapTest {
         System.out.println("removed Z: " + zList);
     }
 
+    @Test
+    public void hashTest() {
+        String key1 = "123_ABC";
+        String key2 = "123_ABD";
+        String key3 = "123_BCD";
+        String key4 = "123_ASGHAD";
+        String key5 = "456_ASG";
+        String key6 = "456_HAD";
+        String key7 = "456_ASGHAD";
+        String key8 = "456_ABC";
+
+        System.out.println(hash(key1));
+        System.out.println(hash(key2));
+        System.out.println(hash(key3));
+        System.out.println(hash(key4));
+        System.out.println(hash(key5));
+        System.out.println(hash(key6));
+        System.out.println(hash(key7));
+        System.out.println(hash(key8));
+
+        System.out.println((8 - 1) & hash(key1));
+        System.out.println((8 - 1) & hash(key2));
+        System.out.println((8 - 1) & hash(key3));
+        System.out.println((8 - 1) & hash(key4));
+        System.out.println((8 - 1) & hash(key5));
+        System.out.println((8 - 1) & hash(key6));
+        System.out.println((8 - 1) & hash(key7));
+        System.out.println((8 - 1) & hash(key8));
+    }
+
+    private int hash(String key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+    }
+
 }

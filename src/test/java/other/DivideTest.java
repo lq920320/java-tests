@@ -38,4 +38,9 @@ public class DivideTest {
 
         System.out.println(4 * 3600 * 24);
     }
+
+    @Test
+    public void divideTest2() {
+        System.out.println(15 / 20);
+    }
 }

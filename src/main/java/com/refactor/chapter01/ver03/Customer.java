@@ -37,7 +37,7 @@ public class Customer {
         while (rentals.hasMoreElements()) {
             // 取得一笔租借记。
             Rental rental = (Rental) rentals.nextElement();
-            // double thisAmount = rental.getCharge();
+//             double thisAmount = rental.getCharge();
             // add frequent renter points （累计常客积点。
             frequentRenterPoints++;
             // add bonus for a two day new release rental

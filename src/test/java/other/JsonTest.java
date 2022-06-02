@@ -7,6 +7,8 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import lombok.Data;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * @author liuqian
  * @date 2019/7/11  10:40
@@ -30,6 +32,12 @@ public class JsonTest {
     @Test
     public void jsonArrayTest() {
         JSONArray array = JSONArray.parseArray("[]");
+        System.out.println(array);
+    }
+
+    @Test
+    public void jsonArrayTest2() {
+        List<String> array = JSON.parseArray("[\"6B4182E10F594AF4A2A38A4B27E8EA06\"]", String.class);
         System.out.println(array);
     }
 

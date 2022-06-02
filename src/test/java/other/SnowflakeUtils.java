@@ -154,9 +154,12 @@ public class SnowflakeUtils {
     public static void main(String[] args) {
         Set<Long> ids = new HashSet<>();
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 30000; i++) {
             long id = genId();
-            System.out.println(id);
+            int length = String.valueOf(id).length();
+            if (length < 18) {
+                System.out.println(id);
+            }
             ids.add(id);
         }
         long end = System.currentTimeMillis();
