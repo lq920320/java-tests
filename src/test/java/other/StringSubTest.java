@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class StringSubTest {
@@ -184,12 +183,21 @@ public class StringSubTest {
         }};
         System.out.println(stringList);
 
-       List<String> a = stringList.stream()
-               .map(String::toLowerCase)
-               .collect(Collectors.toList());
+        List<String> a = stringList.stream()
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
 
         System.out.println(a);
         System.out.println(stringList);
+    }
+
+    @Test
+    public void rightPadTest() {
+        String salesVolumeStr = "220";
+        String a = salesVolumeStr.substring(0, 1);
+        System.out.println(a);
+        System.out.println();
+        System.out.println(StringUtils.rightPad(a, salesVolumeStr.length(), "0") + "+");
     }
 
 }
