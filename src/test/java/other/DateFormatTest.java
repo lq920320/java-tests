@@ -124,4 +124,12 @@ public class DateFormatTest {
         System.out.println(ZoneId.systemDefault());
         System.out.println(now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString());
     }
+
+    @Test
+    public void formatTest() {
+        String STANDARD_TIME_FORMAT = "yyyyMMddHHmmss";
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(STANDARD_TIME_FORMAT);
+
+        System.out.println(new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().format(FORMATTER));
+    }
 }
