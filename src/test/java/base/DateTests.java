@@ -182,7 +182,7 @@ public class DateTests {
         final LocalDate now = LocalDate.now();
         final LocalDate birthdate2 = LocalDate.of(2012, 6, 30);
         final LocalDate birthdate3 = LocalDate.of(2012, 6, 30);
-        // Hours, minutes, second and nanoOfSecond can also be configured with another class LocalDateTime
+        // Hours, minutes, second and nanoOfSecond can also be configured with another class LocalDateTime.
         // LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanoOfSecond);
 
         // isBefore example
@@ -220,7 +220,6 @@ public class DateTests {
     @Test
     public void formatWithZoneTest() {
         Date date = new Date();
-
         // 打印默认时区
         System.out.println(TimeZone.getDefault().getDisplayName());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 注意：时区没有在 format 中设置
