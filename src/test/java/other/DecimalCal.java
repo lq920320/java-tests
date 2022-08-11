@@ -31,11 +31,27 @@ public class DecimalCal {
         BigDecimal[] var5 = multiplies;
         int var6 = multiplies.length;
 
-        for(int var7 = 0; var7 < var6; ++var7) {
+        for (int var7 = 0; var7 < var6; ++var7) {
             BigDecimal b = var5[var7];
             r = r.multiply(null == b ? one : b);
         }
 
         return r.setScale(scale, roundingMode);
+    }
+
+
+    @Test
+    public void cal() {
+        String downloadDisFileLimitStr = "1610612736";
+        long downloadDisFileLimit = Long.parseLong(downloadDisFileLimitStr);
+        String limitStr;
+        float a = (float) downloadDisFileLimit / 1024 / 1024 / 1024;
+        limitStr = a + "GB";
+        System.out.println(limitStr);
+
+        float b = (float) (downloadDisFileLimit / 1024 / 1024);
+        limitStr = b + "MB";
+        System.out.println(limitStr);
+
     }
 }
