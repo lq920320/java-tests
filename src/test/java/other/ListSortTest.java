@@ -35,6 +35,20 @@ public class ListSortTest {
         System.out.println();
     }
 
+
+    @Test
+    public void reverseTest() {
+        List<Integer> intList = new ArrayList<>();
+        intList.add(1);
+        intList.add(2);
+        intList.add(3);
+        intList.add(4);
+        // 正序
+        System.out.println(intList);
+        // 反序
+        System.out.println(intList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
+    }
+
     @Test
     public void listNullTest() {
         List<Integer> aList = getTestListWithNull();
